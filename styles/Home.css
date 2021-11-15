@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+textarea {
+  width: 100%;
+  height: 95vh;
+  border: none;
+  resize: none;
+  font-size: 1.3em;
+  padding: 25px 22px;
+  font-family: Josefin Sans;
+  color: var(--text);
+  margin: 0;
+}
+
+textarea::placeholder {
+  color: var(--placeholder);
+}
+
+textarea:focus {
+  outline: none;
+}
