@@ -4,63 +4,131 @@ import { useState } from 'react';
 export default function Home() {
   const tabs = [
     {
-      title: 'Bubble 1',
+      title: 'Reminders',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Shopping List',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Meeting Notes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Classes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Reminders',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Shopping List',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Meeting Notes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Classes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Reminders',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Shopping List',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Meeting Notes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Classes',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Reminders',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Shopping List',
       content: '',
     },
     {
-      title: 'Bubble 1',
+      title: 'Meeting Notes',
+      content: '',
+    },
+    {
+      title: 'Classes',
+      content: '',
+    },
+    {
+      title: 'Reminders',
+      content: '',
+    },
+    {
+      title: 'Shopping List',
+      content: '',
+    },
+    {
+      title: 'Meeting Notes',
+      content: '',
+    },
+    {
+      title: 'Classes',
+      content: '',
+    },
+    {
+      title: 'Reminders',
+      content: '',
+    },
+    {
+      title: 'Shopping List',
+      content: '',
+    },
+    {
+      title: 'Meeting Notes',
+      content: '',
+    },
+    {
+      title: 'Classes',
+      content: '',
+    },
+    {
+      title: 'Reminders',
+      content: '',
+    },
+    {
+      title: 'Shopping List',
+      content: '',
+    },
+    {
+      title: 'Meeting Notes',
+      content: '',
+    },
+    {
+      title: 'Classes',
+      content: '',
+    },
+    {
+      title: 'Reminders',
+      content: '',
+    },
+    {
+      title: 'Shopping List',
+      content: '',
+    },
+    {
+      title: 'Meeting Notes',
+      content: '',
+    },
+    {
+      title: 'Classes',
       content: '',
     },
 
@@ -68,19 +136,7 @@ export default function Home() {
   const [bubbles, setBubbles] = useState(tabs);
   return (
     <Tabs>
-      <TabList>
-        <div>
-          {
-            tabs.map((tab, index) => (
-              <Tab key={index}>
-                <div className="tab-text">
-                  {tab.title}
-                </div>
-              </Tab>
-            ))
-          }
-        </div>
-      </TabList>
+      <div className="textareas">
         {
           bubbles.map((tab, index) => (
             <TabPanel key={index}>
@@ -96,6 +152,20 @@ export default function Home() {
             </TabPanel>
           ))
         }
+      </div>
+      <TabList>
+        <div className="tab-list">
+          {
+            tabs.map((tab, index) => (
+              <Tab key={index}>
+                <div className="tab-text">
+                  {tab.title}
+                </div>
+              </Tab>
+            ))
+          }
+        </div>
+      </TabList>
     </Tabs>
   )
 }
