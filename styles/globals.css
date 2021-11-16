@@ -7,8 +7,8 @@ body {
   height: 100%;
   display: block;
   font-family: Inter, sans-serif;
-  overflow: hidden;
   scroll-behavior: smooth;
+  overflow-y: hidden;
 }
 
 * {
@@ -28,7 +28,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
@@ -38,5 +38,5 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: var(--primary);
   border-radius: 10px;
-  border: 3px solid var(--background);
+  border: 3px solid var(--primary);
 }

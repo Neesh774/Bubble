@@ -7,10 +7,80 @@ export default function Home() {
       title: 'Bubble 1',
       content: '',
     },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+    {
+      title: 'Bubble 1',
+      content: '',
+    },
+
   ];
   const [bubbles, setBubbles] = useState(tabs);
   return (
     <Tabs>
+      <TabList>
+        <div>
+          {
+            tabs.map((tab, index) => (
+              <Tab key={index}>
+                <div className="tab-text">
+                  {tab.title}
+                </div>
+              </Tab>
+            ))
+          }
+        </div>
+      </TabList>
         {
           bubbles.map((tab, index) => (
             <TabPanel key={index}>
@@ -26,17 +96,6 @@ export default function Home() {
             </TabPanel>
           ))
         }
-      <TabList>
-        {
-          tabs.map((tab, index) => (
-            <Tab key={index}>
-              <div className="tab-text">
-                {tab.title}
-              </div>
-            </Tab>
-          ))
-        }
-      </TabList>
     </Tabs>
   )
 }

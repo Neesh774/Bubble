@@ -1,26 +1,27 @@
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
-  }
-  
-  .react-tabs__tab-list {
-    border-top: 3px solid var(--primary);
-    margin: 0 0 10px;
-    padding: 0;
-    height: 40px;
-    overflow-x: scroll;
     display: flex;
   }
   
+  .react-tabs__tab-list {
+    border-right: 3px solid var(--primary);
+    margin: 0 0 10px;
+    padding-left: 0;
+    width: 90px;
+    display: flex;
+    white-space: nowrap;
+  }
+
   .react-tabs__tab {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid transparent;
-    border-top: none;
-    top: -2px;
+    border: 3px solid transparent;
+    border-right: none;
+    right: -8px;
     position: relative;
     list-style: none;
-    padding: 3px 5px;
+    padding: 3px 5px 3px 0;
     cursor: pointer;
     color: var(--primary);
   }
@@ -29,7 +30,7 @@
     background: var(--background);
     border-color: var(--primary);
     color: var(--text);
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px 0 0 5px;
   }
   
   .react-tabs__tab:focus {
