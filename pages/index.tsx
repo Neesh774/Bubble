@@ -4,144 +4,26 @@ import { useState } from 'react';
 export default function Home() {
   const tabs = [
     {
-      title: 'Reminders',
+      title: 'Bubble 1',
       content: '',
     },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-    {
-      title: 'Reminders',
-      content: '',
-    },
-    {
-      title: 'Shopping List',
-      content: '',
-    },
-    {
-      title: 'Meeting Notes',
-      content: '',
-    },
-    {
-      title: 'Classes',
-      content: '',
-    },
-
   ];
   const [bubbles, setBubbles] = useState(tabs);
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const createBubble = () => {
+    setBubbles([...bubbles, { title: `Bubble ${bubbles.length + 1}`, content: '' }]);
+    setSelectedTab(bubbles.length - 1);
+    console.log(bubbles.length);
+  }
   return (
-    <Tabs>
+    <Tabs defaultIndex={selectedTab}>
       <div className="textareas">
         {
           bubbles.map((tab, index) => (
             <TabPanel key={index}>
               <textarea
-                placeholder="Start typing..."
+                placeholder={`Start typing in ${tab.title}...`}
                 onChange={(e) => {
                   const newBubbles = [...bubbles];
                   newBubbles[index].content = e.target.value;
@@ -156,14 +38,24 @@ export default function Home() {
       <TabList>
         <div className="tab-list">
           {
-            tabs.map((tab, index) => (
+            bubbles.map((tab, index) => (
               <Tab key={index}>
                 <div className="tab-text">
                   {tab.title}
                 </div>
+                <button className="close-tab">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="transparent" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </button>
               </Tab>
             ))
           }
+          <button className="add-tab" onClick={createBubble}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
         </div>
       </TabList>
     </Tabs>
