@@ -1,2 +1,2 @@
 # Bubble
-Bubble is a simple and minimalistic way to make quick jots and notes. It was inspired by [Nute](https://nute.app/), but has more features while keeping the minimalistic ideology.
+Bubble is a pet project I created to help me and others be able to make quick jots and notes without having to worry about saving them in an appropriate folder, save them under my Drive, and simply reduce the hassle.
