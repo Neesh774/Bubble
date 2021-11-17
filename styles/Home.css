@@ -8,7 +8,7 @@ textarea {
   font-family: Josefin Sans;
   color: var(--text);
   overflow: auto;
-  width: 100%;
+  width: 93%;
   height: 100vh;
 }
 .textareas {

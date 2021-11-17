@@ -19,7 +19,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 100px;
+  width: 10%;
 }
 .react-tabs__tab {
   transition: ease-in-out 0.2s;

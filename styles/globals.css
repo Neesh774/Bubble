@@ -41,7 +41,6 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--scroll);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   background-clip: padding-box;
 }
