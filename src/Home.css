@@ -124,9 +124,9 @@ kbd {
   transition: ease-in-out 0.2s;
   fill: var(--background);
 }
-.ilios:hover .iliosBackground {
+/* .ilios:hover .iliosBackground {
   fill: #226699;
-}
+} */
 .ilios:hover .iliosPrimary {
   fill: #F4900C;
 }
@@ -167,19 +167,17 @@ kbd {
   border: none;
   outline: none;
   font-size: 1rem;
-  background-color: var(--primary);
+  background-color: var(--scroll);
   color: var(--background);
   margin-left: 1rem;
   transition: ease-in-out 0.2s;
 }
 
 .save:disabled {
-  background-color: var(--danger);
-  color: var(--background);
+  opacity: 0.5;
 }
 
 .save:hover:not(:disabled) {
-  background-color: var(--scroll);
   padding: 0.7rem 1.2rem;
   cursor: pointer;
 }

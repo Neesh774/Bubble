@@ -18,10 +18,10 @@ export default function App() {
     localStorage.setItem("text", text);
     // remove the show class from the tips element if it has it
     const tips = document.getElementsByClassName("tips")[0];
-    if (tips.classList.contains("show") && text.length > 0) {
+    if (tips.classList.contains("show") && text.trim().length > 0) {
       tips.classList.remove("show");
     }
-    if (!tips.classList.contains("show") && text.length < 1) {
+    else if ((!tips.classList.contains("show")) && text.trim().length < 1) {
       tips.classList.add("show");
     }
   }, [text]);
@@ -105,10 +105,6 @@ export default function App() {
             data-tip="Created by Ilios Labs"
           >
             <path
-              d="M500 444.444C500 475.125 475.125 500 444.444 500H55.5556C24.875 500 0 475.125 0 444.444V55.5556C0 24.875 24.875 0 55.5556 0H444.444C475.125 0 500 24.875 500 55.5556V444.444Z"
-              className="iliosBackground"
-            />
-            <path
               d="M152.778 125C152.778 125 254.028 61.7086 444.444 55.9864C453.5 55.7086 472.222 55.5558 472.222 69.4447C388.889 194.445 347.222 388.889 347.222 388.889L152.778 125Z"
               fill="#F4900C"
               className="iliosPrimary"
@@ -132,7 +128,7 @@ export default function App() {
             className="tooltip"
           />
         </div>
-        <button onClick={saveFile} className="save" disabled={text.length < 1}>Save As TXT</button>
+        <button onClick={saveFile} className="save" disabled={text.trim().length < 1}>Save As TXT</button>
       </div>
     </>
   );
