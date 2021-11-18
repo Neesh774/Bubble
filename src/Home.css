@@ -16,6 +16,7 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+  caret-color: var(--text);
 }
 .textareas {
   width: 100%;
@@ -34,9 +35,8 @@ pre:focus {
   right: 0;
   width: 30%;
   margin-right: 2rem;
-  align-items: baseline;
-  outline: solid;
   padding: 1rem;
+  border: 3px solid var(--primary);
   border-radius: 10px;
   animation: tips-pop-out 0.3s ease-out;
   -webkit-animation: tips-pop-out 0.3s ease-out;
@@ -69,15 +69,120 @@ kbd {
   display: inline-block;
   padding: 0.2rem 0.4rem;
   margin: 0 0.2rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 5px;
   background-color: var(--secondary);
 }
 
 .shortcut {
+  font-size: 1rem;
   margin: 0.6rem 0;
 }
 
+.actions {
+  position: fixed;
+  transform: translate(0%, -50%);
+  bottom: 0%;
+  right: 0;
+  width: fit-content;
+  align-items: center;
+  padding-right: 5rem;
+  display: flex;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: bold;
+  opacity: 0.5;
+  transition: ease-in-out 0.4s;
+}
+.icons:hover {
+  opacity: 1;
+}
+.icons a {
+  margin: 0 20px;
+}
+
+.discord, .ilios {
+  width: 50px;
+  height: 50px;
+}
+
+.discordColor {
+  transition: ease-in-out 0.2s;
+  fill: var(--primary);
+}
+
+.discord:hover .discordColor {
+  fill: #5865F2;
+}
+
+.iliosBackground {
+  transition: ease-in-out 0.2s;
+  fill: var(--background);
+}
+.ilios:hover .iliosBackground {
+  fill: #226699;
+}
+.ilios:hover .iliosPrimary {
+  fill: #F4900C;
+}
+.ilios:hover .iliosSecondary {
+  fill: #FFAC33;
+}
+.ilios:hover .iliosTertiary {
+  fill: #FFD983;
+}
+.ilios:focus {
+  outline: none;
+}
+.iliosPrimary {
+  transition: ease-in-out 0.2s;
+  fill: var(--primary);
+}
+.iliosSecondary {
+  transition: ease-in-out 0.2s;
+  fill: var(--secondary);
+}
+.iliosTertiary {
+  transition: ease-in-out 0.2s;
+  fill: var(--backgroundDark);
+}
+
+.tooltip {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+  font-family: Inter !important;
+  outline-width: 4px !important;
+  border-color: var(--primary) !important;
+  border-radius: 10px !important;
+}
+
+.save {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: var(--primary);
+  color: var(--background);
+  margin-left: 1rem;
+  transition: ease-in-out 0.2s;
+}
+
+.save:disabled {
+  background-color: var(--danger);
+  color: var(--background);
+}
+
+.save:hover:not(:disabled) {
+  background-color: var(--scroll);
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+}
 @-webkit-keyframes tips-pop-in {
   0% {
     opacity: 0;
@@ -101,7 +206,6 @@ kbd {
   }
 }
 
-/* slide in from the right */
 @keyframes tips-pop-in {
   0% {
     opacity: 0;
