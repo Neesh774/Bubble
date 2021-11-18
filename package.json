@@ -8,9 +8,10 @@
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-medium-editor": "^1.8.1",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2",
-    "react-medium-editor": "^1.8.1"
+    "react-tabs": "^3.2.3",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

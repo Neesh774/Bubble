@@ -1,5 +1,6 @@
 import './Home.css';
 import './popover.css';
+import 'medium-editor/dist/css/medium-editor.css'
 import Editor from "react-medium-editor";
 import { useState, useEffect } from "react";
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
       options={{
         toolbar: { buttons: ["bold", "italic", "underline"] },
         placeholder: {
-          text: "Start typing...",
+          text: "What's on your mind?",
           hideOnClick: false,
         },
       }}
