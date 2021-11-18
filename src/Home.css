@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 
 pre {
   border: none;
@@ -25,4 +25,148 @@ pre {
 
 pre:focus {
   outline: none;
+}
+
+.tips {
+  position: fixed;
+  transform: translate(0%, -50%);
+  top: 50%;
+  right: 0;
+  width: 30%;
+  margin-right: 2rem;
+  align-items: baseline;
+  outline: solid;
+  padding: 1rem;
+  border-radius: 10px;
+  animation: tips-pop-out 0.3s ease-out;
+  -webkit-animation: tips-pop-out 0.3s ease-out;
+  opacity: 0
+}
+
+.tips.show {
+  animation: tips-pop-in 0.3s ease-in;
+  -webkit-animation: tips-pop-in 0.3s ease-in;
+  opacity: 1;
+}
+.tips-content-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.tips-content-text {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+br {
+  display: block;
+  margin: 10px 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  margin: 0 0.2rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background-color: var(--secondary);
+}
+
+.shortcut {
+  margin: 0.6rem 0;
+}
+
+@-webkit-keyframes tips-pop-in {
+  0% {
+    opacity: 0;
+    right: -200px;
+  }
+  25% {
+    opacity: 0.25;
+    right: -40px;
+  }
+  50% {
+    opacity: 0.5;
+    right: -20px;
+  }
+  75% {
+    opacity: 0.75;
+    right: -10px;
+  }
+  100% {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+/* slide in from the right */
+@keyframes tips-pop-in {
+  0% {
+    opacity: 0;
+    right: -200px;
+  }
+  25% {
+    opacity: 0.25;
+    right: -40px;
+  }
+  50% {
+    opacity: 0.5;
+    right: -20px;
+  }
+  75% {
+    opacity: 0.75;
+    right: -10px;
+  }
+  100% {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+@keyframes tips-pop-out {
+  0% {
+    opacity: 1;
+    right: 0px;
+  }
+  25% {
+    opacity: 0.75;
+    right: -140px;
+  }
+  50% {
+    opacity: 0.5;
+    right: -160px;
+  }
+  75% {
+    opacity: 0.25;
+    right: -180px;
+  }
+  100% {
+    opacity: 0;
+    right: -200px;
+  }
+}
+
+@-webkit-keyframes tips-pop-out {
+  0% {
+    opacity: 1;
+    right: 0px;
+  }
+  25% {
+    opacity: 0.75;
+    right: -10px;
+  }
+  50% {
+    opacity: 0.5;
+    right: -20px;
+  }
+  75% {
+    opacity: 0.25;
+    right: -40px;
+  }
+  100% {
+    opacity: 0;
+    right: -200px;
+  }
 }
