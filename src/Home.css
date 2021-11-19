@@ -204,10 +204,12 @@ kbd {
     margin: auto;
   }
   .tips {
+    transform: translate(0%, -100%);
     position: relative;
     width: 90%;
-    bottom: 25vh;
+    bottom: 40px;
     margin: auto;
+    padding: 0 1rem;
     animation: actions-pop-out 0.3s ease-out;
     -webkit-animation: actions-pop-out 0.3s ease-out;
   }
