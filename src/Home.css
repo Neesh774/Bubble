@@ -1,12 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
-
+@font-face {
+  font-family: JosefinSans;
+  src: url(JosefinSans-Regular.ttf);
+}
 pre {
   border: none;
   resize: none;
   font-size: 1.3em;
   padding: 25px 22px;
   margin: 0;
-  font-family: Josefin Sans;
+  font-family: JosefinSans;
   color: var(--text);
   overflow: auto;
   width: 100%;
@@ -18,6 +20,7 @@ pre {
   word-wrap: break-word;
   caret-color: var(--text);
 }
+
 .textareas {
   width: 100%;
   height: 100vh;
@@ -40,7 +43,7 @@ pre:focus {
   border-radius: 10px;
   animation: tips-pop-out 0.3s ease-out;
   -webkit-animation: tips-pop-out 0.3s ease-out;
-  opacity: 0
+  opacity: 0;
 }
 
 .tips.show {
@@ -81,13 +84,18 @@ kbd {
 
 .actions {
   position: fixed;
-  transform: translate(0%, -50%);
-  bottom: 0%;
+  bottom: 5%;
   right: 0;
+  align-items: center;
+  animation: actions-pop-in 0.5s ease-in;
+  -webkit-animation: actions-pop-in 0.5s ease-in;
+}
+
+.actionsChild {
   width: fit-content;
   align-items: center;
-  padding-right: 5rem;
   display: flex;
+  padding-right: 5rem;
 }
 
 .icons {
@@ -106,7 +114,8 @@ kbd {
   margin: 0 20px;
 }
 
-.discord, .ilios {
+.discord,
+.ilios {
   width: 50px;
   height: 50px;
 }
@@ -117,24 +126,21 @@ kbd {
 }
 
 .discord:hover .discordColor {
-  fill: #5865F2;
+  fill: #5865f2;
 }
 
 .iliosBackground {
   transition: ease-in-out 0.2s;
   fill: var(--background);
 }
-/* .ilios:hover .iliosBackground {
-  fill: #226699;
-} */
 .ilios:hover .iliosPrimary {
-  fill: #F4900C;
+  fill: #f4900c;
 }
 .ilios:hover .iliosSecondary {
-  fill: #FFAC33;
+  fill: #ffac33;
 }
 .ilios:hover .iliosTertiary {
-  fill: #FFD983;
+  fill: #ffd983;
 }
 .ilios:focus {
   outline: none;
@@ -174,6 +180,7 @@ kbd {
 }
 
 .save:disabled {
+  animation: none;
   opacity: 0.5;
 }
 
@@ -181,94 +188,120 @@ kbd {
   padding: 0.7rem 1.2rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  pre {
+    height: 90vh;
+  }
+  .shortcut {
+    font-size: 0.8rem;
+  }
+  .actions {
+    width: 100%;
+  }
+  .actionsChild {
+    padding-right: 0;
+    margin: auto;
+  }
+  .tips {
+    position: relative;
+    width: 90%;
+    bottom: 25vh;
+    margin: auto;
+    animation: actions-pop-out 0.3s ease-out;
+    -webkit-animation: actions-pop-out 0.3s ease-out;
+  }
+  .tips.show {
+    animation: actions-pop-in 0.3s ease-in;
+    -webkit-animation: actions-pop-in 0.3s ease-in;
+  }
+  .tips-content-text {
+    font-size: 1rem;
+  }
+}
+
 @-webkit-keyframes tips-pop-in {
-  0% {
+  from {
     opacity: 0;
     right: -200px;
   }
-  25% {
-    opacity: 0.25;
-    right: -40px;
-  }
-  50% {
-    opacity: 0.5;
-    right: -20px;
-  }
-  75% {
-    opacity: 0.75;
-    right: -10px;
-  }
-  100% {
+  to {
     opacity: 1;
     right: 0px;
   }
 }
 
 @keyframes tips-pop-in {
-  0% {
+  from {
     opacity: 0;
     right: -200px;
   }
-  25% {
-    opacity: 0.25;
-    right: -40px;
-  }
-  50% {
-    opacity: 0.5;
-    right: -20px;
-  }
-  75% {
-    opacity: 0.75;
-    right: -10px;
-  }
-  100% {
+  to {
     opacity: 1;
     right: 0px;
   }
 }
 
 @keyframes tips-pop-out {
-  0% {
+  from {
     opacity: 1;
     right: 0px;
   }
-  25% {
-    opacity: 0.75;
-    right: -140px;
-  }
-  50% {
-    opacity: 0.5;
-    right: -160px;
-  }
-  75% {
-    opacity: 0.25;
-    right: -180px;
-  }
-  100% {
+  to {
     opacity: 0;
     right: -200px;
   }
 }
 
 @-webkit-keyframes tips-pop-out {
-  0% {
+  from {
     opacity: 1;
     right: 0px;
   }
-  25% {
-    opacity: 0.75;
-    right: -10px;
-  }
-  50% {
-    opacity: 0.5;
-    right: -20px;
-  }
-  75% {
-    opacity: 0.25;
-    right: -40px;
-  }
-  100% {
+  to {
     opacity: 0;
     right: -200px;
+  }
+}
+
+@keyframes actions-pop-in {
+  from {
+    opacity: 0;
+    bottom: -200px;
+  }
+  to {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+@-webkit-keyframes actions-pop-in {
+  from {
+    opacity: 0;
+    bottom: -200px;
+  }
+  to {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+
+@keyframes actions-pop-out {
+  from {
+    opacity: 1;
+    bottom: 0px;
+  }
+  to {
+    opacity: 0;
+    bottom: -200px;
+  }
+}
+@-webkit-keyframes actions-pop-out {
+  from {
+    opacity: 1;
+    bottom: 0px;
+  }
+  to {
+    opacity: 0;
+    bottom: 200px;
   }
 }
