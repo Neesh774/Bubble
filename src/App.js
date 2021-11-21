@@ -4,6 +4,11 @@ import "./popover.css";
 import { useState } from "react";
 import { Editor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import Typography from "@tiptap/extension-typography";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
 import PureModal from "react-pure-modal";
 import "./modal.scss";
 
@@ -11,7 +16,7 @@ export default function App() {
   const [modal, setModal] = useState(false);
 
   const editor = new Editor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline, Typography, Document, Paragraph, Text],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
     onUpdate({ editor }) {
       const json = JSON.stringify(editor.getJSON());
@@ -46,7 +51,6 @@ export default function App() {
   };
   return (
     <>
-
       <EditorContent editor={editor} />
       <div className="tips show">
         <div className="tips-content-title">Welcome to Bubble!</div>
