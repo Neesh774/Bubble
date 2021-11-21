@@ -1,0 +1,129 @@
+.body-modal-fix {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .pure-modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .backdrop-overflow-hidden {
+    overflow: hidden !important;
+  }
+  
+  .pure-modal-backdrop .pure-modal {
+    width: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    max-height: 100%;
+  }
+  
+  .pure-modal.auto-height {
+    position: static;
+  }
+  
+  .pure-modal-backdrop.scrollable {
+    overflow-y: auto;
+  }
+  
+  .pure-modal-backdrop .panel {
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
+  }
+  .pure-modal-backdrop:not(.scrollable) .panel {
+    grid-template-rows: min-content minmax(0, 1fr) min-content;
+    max-height: -moz-available;
+    max-height: -webkit-fill-available;
+    max-height: fill-available;
+    height: 100%;
+  }
+  
+  .pure-modal > * > * {
+    flex: 0 0 auto;
+  }
+  
+  @media (max-width: 480px) {
+    .pure-modal-backdrop .pure-modal {
+      width: 100%;
+    }
+  }
+
+
+  .pure-modal {
+    .panel-body {
+      background-color: var(--background);
+      line-height: 1.3rem;
+      color: var(--text);
+  
+  
+      kbd {
+        display: inline-block;
+        padding: 0.2rem 0.4rem;
+        margin: 0 0.2rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        background-color: var(--secondary);
+      }
+    }
+
+    .panel-title {
+      justify-content: left;
+      padding: 15px 0 0 15px;
+      margin: 0;
+      background-color: var(--background);
+      border-radius: 10px 10px 0 0;
+      font-size: 1.5rem;
+    }
+    
+    .close {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: ease-in-out 0.2s;
+    }
+    
+    .close:hover {
+      background-color: var(--secondary);
+      padding: 0.7rem 1.2rem;
+    }
+    
+    .panel-body {
+      padding: 15px;
+      border-radius: 0 0 10px 10px;
+    }
+    
+    .panel-footer {
+      justify-content: center;
+    }
+    
+    .panel-body,
+    .panel-footer,
+    .panel-title {
+      word-break: break-all;
+    }
+  }
+
+  
+  .pure-modal-backdrop .additional-row {
+    display: grid;
+    grid-template-rows: min-content minmax(0, 1fr) min-content min-content;
+  }
+  
+  .pure-modal-backdrop:not(.scrollable) .additional-row {
+    display: grid;
+    grid-template-rows: min-content minmax(0, 1fr) min-content min-content;
+  }
+  

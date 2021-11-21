@@ -6,9 +6,12 @@
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.44",
+    "@tiptap/react": "^2.0.0-beta.95",
+    "@tiptap/starter-kit": "^2.0.0-beta.142",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-medium-editor": "^1.8.1",
+    "react-pure-modal": "^2.1.0",
     "react-scripts": "4.0.3",
     "react-tabs": "^3.2.3",
     "react-tooltip": "^4.2.21",
@@ -37,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.35"
   }
 }
