@@ -35,7 +35,7 @@ export default function App() {
     editor.getText().trim().length < 1
   );
   const saveFile = () => {
-    let save = editor.text;
+    let save = editor.getText();
     let a = document.createElement("a");
     a.href = window.URL.createObjectURL(
       new Blob([save], { type: "text/plain" })
