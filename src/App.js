@@ -2,7 +2,7 @@ import ReactTooltip from "react-tooltip";
 import "./Home.scss";
 import "./popover.css";
 import { useState } from "react";
-import { Editor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/react";
+import { Editor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import PureModal from "react-pure-modal";
 import "./modal.scss";
