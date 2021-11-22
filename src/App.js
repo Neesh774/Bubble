@@ -2,7 +2,12 @@ import ReactTooltip from "react-tooltip";
 import "./Home.scss";
 import "./popover.css";
 import { useState } from "react";
-import { Editor, EditorContent } from "@tiptap/react";
+import {
+  EditorContent,
+  useEditor,
+  BubbleMenu,
+  FloatingMenu,
+} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Typography from "@tiptap/extension-typography";
@@ -11,11 +16,12 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import PureModal from "react-pure-modal";
 import "./modal.scss";
+import "./menus.scss";
 
 export default function App() {
   const [modal, setModal] = useState(false);
 
-  const editor = new Editor({
+  const editor = useEditor({
     extensions: [StarterKit, Underline, Typography, Document, Paragraph, Text],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
     onUpdate({ editor }) {
@@ -32,8 +38,11 @@ export default function App() {
     },
   });
   const [saveDisabled, setSaveDisabled] = useState(
-    editor.getText().trim().length < 1
+    editor ? editor.getText().trim().length < 1 : true
   );
+  if (!editor) {
+    return null;
+  }
   const saveFile = () => {
     let save = editor.getText();
     let a = document.createElement("a");
@@ -51,6 +60,67 @@ export default function App() {
   };
   return (
     <>
+      {editor && (
+        <BubbleMenu
+          className="bubble-menu"
+          tippyOptions={{ duration: 100 }}
+          editor={editor}
+        >
+          <button
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            className={editor.isActive("bold") ? "is-active" : ""}
+          >
+            Bold
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            className={editor.isActive("italic") ? "is-active" : ""}
+          >
+            Italic
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            className={editor.isActive("strike") ? "is-active" : ""}
+          >
+            Strike
+          </button>
+        </BubbleMenu>
+      )}
+
+      {editor && (
+        <FloatingMenu
+          className="floating-menu"
+          tippyOptions={{ duration: 100 }}
+          editor={editor}
+        >
+          <button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 1 }).run()
+            }
+            className={
+              editor.isActive("heading", { level: 1 }) ? "is-active" : ""
+            }
+          >
+            H1
+          </button>
+          <button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 2 }).run()
+            }
+            className={
+              editor.isActive("heading", { level: 2 }) ? "is-active" : ""
+            }
+          >
+            H2
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            className={editor.isActive("bulletList") ? "is-active" : ""}
+          >
+            Bullet List
+          </button>
+        </FloatingMenu>
+      )}
       <EditorContent editor={editor} />
       <div className="tips show">
         <div className="tips-content-title">Welcome to Bubble!</div>
