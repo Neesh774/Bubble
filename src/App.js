@@ -14,13 +14,16 @@ import Typography from "@tiptap/extension-typography";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
-import PureModal from "react-pure-modal";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 import "./modal.scss";
 import "./menus.scss";
 
 export default function App() {
   const [modal, setModal] = useState(false);
-
+  const closeModal = () => {
+    setModal(false);
+  };
   const editor = useEditor({
     extensions: [StarterKit, Underline, Typography, Document, Paragraph, Text],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
@@ -83,6 +86,12 @@ export default function App() {
             className={editor.isActive("strike") ? "is-active" : ""}
           >
             Strike
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleUnderline().run()}
+            className={editor.isActive("underline") ? "is-active" : ""}
+          >
+            Underline
           </button>
         </BubbleMenu>
       )}
@@ -200,16 +209,16 @@ export default function App() {
           </button>
         </div>
       </div>
-      <PureModal
-        header="Shortcuts"
-        isOpen={modal}
-        closeButton="Close"
-        closeButtonPosition="bottom"
-        onClose={() => {
-          setModal(false);
-          return true;
+      <Modal
+        open={modal}
+        onClose={closeModal}
+        center
+        classNames={{
+          modal: "customModal",
         }}
       >
+        <h2>Shortcuts</h2>
+        <hr />
         <p>
           <div className="shortcut">
             New Line: <kbd>shift</kbd> + <kbd>enter</kbd>
@@ -235,7 +244,7 @@ export default function App() {
             Code: <kbd>ctrl</kbd> + <kbd>e</kbd>
           </div>
         </p>
-      </PureModal>
+      </Modal>
     </>
   );
 }

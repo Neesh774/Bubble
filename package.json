@@ -15,7 +15,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.142",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-pure-modal": "^2.1.0",
+    "react-responsive-modal": "^6.1.0",
     "react-scripts": "4.0.3",
     "react-tabs": "^3.2.3",
     "react-tooltip": "^4.2.21",
