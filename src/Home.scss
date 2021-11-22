@@ -20,14 +20,7 @@
   word-wrap: break-word;
   caret-color: var(--text);
 }
-
-.textareas {
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-}
-
-pre:focus {
+.ProseMirror:focus {
   outline: none;
 }
 
@@ -200,9 +193,14 @@ kbd {
   .shortcut {
     font-size: 0.8rem;
   }
+  .ProseMirror {
+    padding-bottom: 70px;
+  }
   .actions {
     width: 100%;
-
+    background-color: var(--background);
+    bottom: 0;
+    padding: 1rem;
     .actionsChild {
       padding-right: 0;
       margin: auto;
