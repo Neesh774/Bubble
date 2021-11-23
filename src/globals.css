@@ -20,11 +20,11 @@ html {
 }
 
 ::selection {
-  background: #9c83ff;
+  background: var(--scroll);
   color: var(--background);
 }
 
-:root {
+:root, :root.light {
   --background: #fff;
   --backgroundDark: #838383;
   --text: #8898aa;
@@ -32,9 +32,52 @@ html {
   --primary: #afafaf; 
   --secondary: #dadada;
   --scroll: #b09dff;
-  --danger: #ff5f5f;
 }
 
+.dark {
+  --background: #1a1a1a;
+  --backgroundDark: #a8a8a8;
+  color: #fff;
+  --text: rgb(190, 190, 190);
+  --placeholder: #cacaca;
+  --primary: #757575; 
+  --secondary: #666666;
+  --scroll: #b09dff;
+}
+
+.cafe {
+  --background: #ceb18d;
+  --backgroundDark: #aa9172;
+  --text: #14120f;
+  --placeholder: #a8a8a8;
+  --primary: #14120f; 
+  --secondary: #ce9a5b;
+  --scroll: #14120f;
+}
+
+.terminal {
+  --background: #000000;
+  --backgroundDark: #a8a8a8;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
+  --text: #39ff14;
+  --placeholder: #cacaca;
+  --primary: #757575; 
+  --secondary: #666666;
+  --scroll: #39ff14;
+}
+
+.blueberry {
+  --background: #212b42;
+  --backgroundDark: #add7ff;
+  color: #fff;
+  --text: #add7ff;
+  --placeholder: #cacaca;
+  --primary: #0c639c; 
+  --secondary: #0082be;
+  --scroll: #0082be;
+}
 ::-webkit-scrollbar {
   width: 5px;
 }

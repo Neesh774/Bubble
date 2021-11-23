@@ -11,7 +11,7 @@
   
   .bubble-menu {
     display: flex;
-    background-color: #0D0D0D10;
+    background-color: var(--backgroundDark);
     padding: 0.2rem;
     border-radius: 0.5rem;
   
@@ -26,13 +26,14 @@
       &:hover,
       &.is-active {
         opacity: 1;
+        color: var(--text);
       }
     }
   }
   
   .floating-menu {
     display: flex;
-    background-color: #0D0D0D10;
+    background-color: var(--backgroundDark);
     padding: 0.2rem;
     border-radius: 0.5rem;
   
@@ -47,6 +48,7 @@
       &:hover,
       &.is-active {
         opacity: 1;
+        color: var(--text);
       }
     }
   }

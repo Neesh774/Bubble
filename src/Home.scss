@@ -3,6 +3,7 @@
   src: url(JosefinSans-Regular.ttf);
 }
 .ProseMirror {
+  background: var(--background);
   border: none;
   resize: none;
   font-size: 1.3em;
@@ -20,6 +21,13 @@
   word-wrap: break-word;
   caret-color: var(--text);
 }
+
+.terminal .ProseMirror {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .ProseMirror:focus {
   outline: none;
 }
@@ -43,6 +51,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: var(--text);
   }
 
   .tips-content-text {
@@ -61,6 +70,10 @@
 br {
   display: block;
   margin: 10px 0;
+}
+
+hr {
+  color: var(--primary);
 }
 
 kbd {
@@ -97,22 +110,20 @@ kbd {
       justify-content: center;
       border-radius: 10px;
       font-weight: bold;
-      opacity: 0.5;
       transition: ease-in-out 0.4s;
 
       .discord,
       .ilios {
         width: 50px;
         height: 50px;
+        opacity: 0.7;
       }
 
-      .discordColor {
-        transition: ease-in-out 0.2s;
-        fill: var(--primary);
-      }
-
-      .discord:hover .discordColor {
-        fill: #5865f2;
+      .discord:hover {
+        opacity: 1;
+        .discordColor {
+          fill: #5865f2;
+        }
       }
 
       .iliosBackground {
@@ -121,6 +132,7 @@ kbd {
       }
 
       .ilios:hover {
+        opacity: 1;
         .iliosPrimary {
           fill: #f4900c;
         }
@@ -135,19 +147,6 @@ kbd {
       .ilios:focus {
         outline: none;
       }
-      .iliosPrimary {
-        transition: ease-in-out 0.2s;
-        fill: var(--primary);
-      }
-      .iliosSecondary {
-        transition: ease-in-out 0.2s;
-        fill: var(--secondary);
-      }
-      .iliosTertiary {
-        transition: ease-in-out 0.2s;
-        fill: var(--backgroundDark);
-      }
-
       .tooltip {
         color: var(--primary) !important;
         font-weight: 600 !important;
@@ -156,14 +155,6 @@ kbd {
         border-color: var(--primary) !important;
         border-radius: 10px !important;
       }
-    }
-
-    .icons:hover {
-      opacity: 1;
-    }
-
-    .icons a {
-      margin: 0 20px;
     }
   }
 
@@ -182,6 +173,7 @@ kbd {
   .save:disabled {
     animation: none;
     opacity: 0.5;
+    cursor: not-allowed;
   }
   
   .save:hover:not(:disabled) {
@@ -190,6 +182,30 @@ kbd {
   }
 }
 
+.css-a84rxm-ItemComponent {
+  background: var(--background) !important;
+  border-bottom: 1px solid var(--background) !important;
+  color: var(--text) !important;
+}
+
+.react-dropdown-select-item-selected {
+  border-bottom: 1px solid var(--background) !important;
+}
+.css-6fdya8-DropDown, .css-4lcv49-DropDown, .css-1r2ipv2-DropDown, .css-14xf46-DropDown, .css-1ouyw62-DropDown, .css-1i7zmss-DropDown {
+  border: none !important;
+  background: var(--background) !important;
+  color: var(--text) !important;
+  box-shadow: 0 0 10px 0 var(--text) !important;
+}
+.css-a84rxm-ItemComponent:hover, .css-a84rxm-ItemComponent:focus {
+  background: var(--backgroundDark) !important;
+  color: var(--background) !important;
+}
+.css-g39zai-ReactDropdownSelect {
+  color: var(--text) !important;
+  border: 3px solid var(--backgroundDark) !important;
+  border-radius: 10px !important;
+}
 @media screen and (max-width: 768px) {
   .shortcut {
     font-size: 0.8rem;
@@ -197,14 +213,30 @@ kbd {
   .ProseMirror {
     padding-bottom: 70px;
   }
+
+  .tips {
+    animation: none;
+  }
   .actions {
     width: 100%;
     background-color: var(--background);
     bottom: 0;
-    padding: 1rem;
+    padding: 0.4rem;
     .actionsChild {
       padding-right: 0;
+      padding-left: 0;
       margin: auto;
+
+      .icons .discord, .icons .ilios{
+        width: 40px;
+        height: 40px;
+      }
+
+      .save {
+        padding: 0.7rem 0.4rem;
+        font-size: 0.9rem;
+        margin-left: 0.4rem;
+      }
     }
   }
   .tips.show {

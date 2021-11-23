@@ -4,6 +4,8 @@ import './globals.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+document.getElementById('root').classList.add(localStorage.getItem('theme') || 'light')
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
