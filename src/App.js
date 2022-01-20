@@ -1,4 +1,3 @@
-import ReactTooltip from "react-tooltip";
 import "./Home.scss";
 import { useState } from "react";
 import {
@@ -14,19 +13,26 @@ import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import { Modal } from "react-responsive-modal";
-import Select from "react-dropdown-select";
 
 import "react-responsive-modal/styles.css";
 import "./modal.scss";
 import "./menus.scss";
+const CustomDocument = Document.extend({
+  addKeyboardShortcuts() {
+    return {
+      'Mod-q': () => this.editor.commands.toggleStrike()
+    }
+  }
+})
 
 export default function App() {
   const [modal, setModal] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") ?? "light");
   const closeModal = () => {
     setModal(false);
   };
   const editor = useEditor({
-    extensions: [StarterKit, Underline, Typography, Document, Paragraph, Text],
+    extensions: [StarterKit, Underline, Typography, CustomDocument, Paragraph, Text],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
     onUpdate({ editor }) {
       const json = JSON.stringify(editor.getJSON());
@@ -86,8 +92,10 @@ export default function App() {
     },
   ];
   const themeChange = (value) => {
-    localStorage.setItem("theme", value[0].value);
-    document.getElementById("root").classList = value[0].value;
+    console.log(value);
+    localStorage.setItem("theme", value.target.value);
+    document.getElementById("root").classList = value.target.value;
+    setTheme(value.target.value);
   };
   return (
     <>
@@ -200,47 +208,12 @@ export default function App() {
                 </defs>
               </svg>
             </a>
-            <svg
-              width="500"
-              height="500"
-              viewBox="0 0 500 500"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="ilios"
-              data-tip="Created by Ilios Labs"
-            >
-              <path
-                d="M152.778 125C152.778 125 254.028 61.7086 444.444 55.9864C453.5 55.7086 472.222 55.5558 472.222 69.4447C388.889 194.445 347.222 388.889 347.222 388.889L152.778 125Z"
-                fill="#606e7d"
-                className="iliosPrimary"
-              />
-              <path
-                d="M166.667 222.222C166.667 222.222 333.333 69.4443 444.444 55.986C453.431 54.8887 472.222 55.5554 472.222 69.4443C375 125 305.556 333.333 305.556 333.333L166.667 222.222Z"
-                fill="#8fa8c2"
-                className="iliosSecondary"
-              />
-              <path
-                d="M210.5 172.75C221.972 182.848 243.667 188.917 258.708 186.25L326.653 174.223C341.708 171.556 349.056 180.861 343.014 194.889L315.681 258.264C309.625 272.292 310.556 294.792 317.736 308.292L350.167 369.181C357.361 382.681 350.778 392.542 335.569 391.125L266.861 384.695C251.653 383.278 230.528 391.111 219.931 402.111L172.014 451.792C161.417 462.792 150 459.597 146.639 444.681L131.514 377.361C128.167 362.459 114.181 344.792 100.444 338.097L38.4028 307.889C24.6667 301.209 24.1805 289.347 37.3194 281.556L96.6805 246.361C109.819 238.57 122.306 219.82 124.417 204.681L133.986 136.348C136.097 121.209 147.222 117.084 158.694 127.181L210.5 172.75V172.75Z"
-                fill="#8898aa"
-                className="iliosTertiary"
-              />
-            </svg>
-            <ReactTooltip
-              type="light"
-              effect="solid"
-              border
-              arrowColor="var(--background)"
-              className="tooltip"
-            />
           </div>
-          <Select
-            options={themeOptions}
-            onChange={themeChange}
-            dropdownPosition="top"
-            color="#947aff"
-            searchable={false}
-            className="select"
-          />
+          <select value={theme} onChange={themeChange}>
+            {themeOptions.map((option, i) => (
+              <option key={i} value={option.value}>{option.label}</option>
+            ))}
+          </select>
           <button onClick={saveFile} className="save" disabled={saveDisabled}>
             Save As TXT
           </button>
@@ -274,7 +247,7 @@ export default function App() {
             <br />
           </div>
           <div className="shortcut">
-            <s>Strikethrough</s>: <kbd>ctrl</kbd> + <kbd>x</kbd>
+            <s>Strikethrough</s>: <kbd>ctrl</kbd> + <kbd>q</kbd>
             <br />
           </div>
           <div className="shortcut">

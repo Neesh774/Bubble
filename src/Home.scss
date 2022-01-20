@@ -8,6 +8,7 @@
   resize: none;
   font-size: 1.3em;
   padding: 25px 22px;
+  padding-bottom: 150px;
   margin: 0;
   font-family: JosefinSans;
   color: var(--text);
@@ -20,6 +21,7 @@
   white-space: -o-pre-wrap;
   word-wrap: break-word;
   caret-color: var(--text);
+  z-index: 2;
 }
 
 .terminal .ProseMirror {
@@ -46,6 +48,7 @@
   animation: tips-pop-out 0.3s ease-out;
   -webkit-animation: tips-pop-out 0.3s ease-out;
   opacity: 0;
+  z-index: 1;
 
   .tips-content-title {
     font-size: 1.5rem;
@@ -65,6 +68,7 @@
   animation: tips-pop-in 0.3s ease-in;
   -webkit-animation: tips-pop-in 0.3s ease-in;
   opacity: 1;
+  z-index: 3;
 }
 
 br {
@@ -97,12 +101,16 @@ kbd {
   align-items: center;
   animation: actions-pop-in 0.5s ease-in;
   -webkit-animation: actions-pop-in 0.5s ease-in;
+  z-index: 10;
 
   .actionsChild {
     width: fit-content;
     align-items: center;
     display: flex;
     padding-right: 5rem;
+    padding-left: 1rem;
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
 
     .icons {
       display: flex;
@@ -111,12 +119,11 @@ kbd {
       border-radius: 10px;
       font-weight: bold;
       transition: ease-in-out 0.4s;
+      margin: 0 0.5rem;
 
-      .discord,
-      .ilios {
-        width: 50px;
-        height: 50px;
-        opacity: 0.7;
+      .discord {
+        width: 30px;
+        height: 30px;
       }
 
       .discord:hover {
@@ -126,26 +133,8 @@ kbd {
         }
       }
 
-      .iliosBackground {
+      .discordColor {
         transition: ease-in-out 0.2s;
-        fill: var(--background);
-      }
-
-      .ilios:hover {
-        opacity: 1;
-        .iliosPrimary {
-          fill: #f4900c;
-        }
-        .iliosSecondary {
-          fill: #ffac33;
-        }
-        .iliosTertiary {
-          fill: #ffd983;
-        }
-      }
-
-      .ilios:focus {
-        outline: none;
       }
       .tooltip {
         color: var(--primary) !important;
@@ -159,7 +148,7 @@ kbd {
   }
 
   .save {
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 1rem;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -168,11 +157,11 @@ kbd {
     color: var(--background);
     margin-left: 1rem;
     transition: ease-in-out 0.2s;
+    height: 30px;
   }
   
   .save:disabled {
     animation: none;
-    opacity: 0.5;
     cursor: not-allowed;
   }
   
@@ -181,30 +170,19 @@ kbd {
     cursor: pointer;
   }
 }
-
-.css-a84rxm-ItemComponent {
-  background: var(--background) !important;
-  border-bottom: 1px solid var(--background) !important;
-  color: var(--text) !important;
-}
-
-.react-dropdown-select-item-selected {
-  border-bottom: 1px solid var(--background) !important;
-}
-.css-6fdya8-DropDown, .css-4lcv49-DropDown, .css-1r2ipv2-DropDown, .css-14xf46-DropDown, .css-1ouyw62-DropDown, .css-1i7zmss-DropDown {
-  border: none !important;
-  background: var(--background) !important;
-  color: var(--text) !important;
-  box-shadow: 0 0 10px 0 var(--text) !important;
-}
-.css-a84rxm-ItemComponent:hover, .css-a84rxm-ItemComponent:focus {
-  background: var(--backgroundDark) !important;
-  color: var(--background) !important;
-}
-.css-g39zai-ReactDropdownSelect {
+select {
   color: var(--text) !important;
   border: 3px solid var(--backgroundDark) !important;
   border-radius: 10px !important;
+  background-color: var(--background);
+  height: 30px;
+  padding: 0 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+select:focus, select:active {
+  outline: none;
+  border: 3px solid var(--backgroundDark) !important;
 }
 @media screen and (max-width: 768px) {
   .shortcut {
@@ -227,7 +205,7 @@ kbd {
       padding-left: 0;
       margin: auto;
 
-      .icons .discord, .icons .ilios{
+      .icons .discord{
         width: 40px;
         height: 40px;
       }
@@ -262,10 +240,12 @@ kbd {
   from {
     opacity: 0;
     right: -200px;
+    z-index: 0;
   }
   to {
     opacity: 1;
     right: 0px;
+    z-index: 3;
   }
 }
 
@@ -273,10 +253,12 @@ kbd {
   from {
     opacity: 1;
     right: 0px;
+    z-index: 3;
   }
   to {
     opacity: 0;
     right: -200px;
+    z-index: 0;
   }
 }
 
