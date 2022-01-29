@@ -12,6 +12,8 @@ import Typography from "@tiptap/extension-typography";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
+import TaskList from "@tiptap/extension-task-list";
+import TaskItem from "@tiptap/extension-task-item";
 import { Modal } from "react-responsive-modal";
 
 import "react-responsive-modal/styles.css";
@@ -20,19 +22,32 @@ import "./menus.scss";
 const CustomDocument = Document.extend({
   addKeyboardShortcuts() {
     return {
-      'Mod-q': () => this.editor.commands.toggleStrike()
-    }
-  }
-})
+      "Mod-q": () => this.editor.commands.toggleStrike(),
+    };
+  },
+});
 
 export default function App() {
   const [modal, setModal] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") ?? "light");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") ?? "light"
+  );
   const closeModal = () => {
     setModal(false);
   };
   const editor = useEditor({
-    extensions: [StarterKit, Underline, Typography, CustomDocument, Paragraph, Text],
+    extensions: [
+      StarterKit,
+      Underline,
+      Typography,
+      CustomDocument,
+      Paragraph,
+      Text,
+      TaskItem.configure({
+        nested: true,
+      }),
+      TaskList,
+    ],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
     onUpdate({ editor }) {
       const json = JSON.stringify(editor.getJSON());
@@ -164,6 +179,12 @@ export default function App() {
           >
             Bullet List
           </button>
+          <button
+            onClick={() => editor.chain().focus().toggleTaskList().run()}
+            className={editor.isActive("taskList") ? "is-active" : ""}
+          >
+            To-Do
+          </button>
         </FloatingMenu>
       )}
       <EditorContent editor={editor} />
@@ -211,7 +232,9 @@ export default function App() {
           </div>
           <select value={theme} onChange={themeChange}>
             {themeOptions.map((option, i) => (
-              <option key={i} value={option.value}>{option.label}</option>
+              <option key={i} value={option.value}>
+                {option.label}
+              </option>
             ))}
           </select>
           <button onClick={saveFile} className="save" disabled={saveDisabled}>

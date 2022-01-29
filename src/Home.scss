@@ -225,6 +225,63 @@ select:focus, select:active {
   }
 }
 
+ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+
+  p {
+    margin: 0;
+  }
+
+  li {
+    display: flex;
+
+    > label {
+      flex: 0 0 auto;
+      margin-right: 0.5rem;
+      user-select: none;
+    }
+
+    > div {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+label input {
+  visibility: hidden;
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  overflow: hidden;
+}
+label span {
+  height: 12px;
+  width: 12px;
+  border: 1px solid grey;
+  display: inline-block;
+}
+[type=checkbox]:checked + span {
+  background-color: var(--primary);
+}
+[type=checkbox] + span {
+  transition: ease-in-out 0.4s;
+}
+li[data-checked="true"] div {
+  text-decoration: line-through;
+  opacity: 0.5;
+  transition: ease-in-out 0.2s;
+}
+[type=checkbox] + span:hover {
+  background-color: var(--text);
+  opacity: 0.7;
+  cursor: pointer;
+}
+[type=checkbox]:checked + span:hover {
+  background-color: var(--primary);
+}
+
 @-webkit-keyframes tips-pop-in {
   from {
     opacity: 0;
