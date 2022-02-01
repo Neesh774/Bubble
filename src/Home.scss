@@ -25,7 +25,7 @@
 }
 
 .terminal .ProseMirror {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: 600;
   font-size: 1.1rem;
 }
@@ -124,6 +124,25 @@ kbd {
       .discord {
         width: 30px;
         height: 30px;
+        margin: 0 0.3rem;
+      }
+
+      .import {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        color: #606e7d;
+        margin: 0 0.3rem;
+        position: relative;
+      }
+
+      .import:hover {
+        cursor: pointer;
+        transform: translateY(-2px);
       }
 
       .discord:hover {
@@ -148,8 +167,8 @@ kbd {
   }
 
   .save {
-    padding: 0.2rem 1rem;
-    border-radius: 10px;
+    padding: 0.2rem 0.2rem 0.2rem 1rem;
+    border-radius: 10px 0 0 10px;
     border: none;
     outline: none;
     font-size: 1rem;
@@ -159,18 +178,49 @@ kbd {
     transition: ease-in-out 0.2s;
     height: 30px;
   }
-  
+
   .save:disabled {
     animation: none;
     cursor: not-allowed;
   }
-  
-  .save:hover:not(:disabled) {
-    padding: 0.7rem 1.2rem;
+}
+
+.save-type {
+  padding: 0.2rem 1rem 0.2rem 0.1rem;
+  margin-right: 0.2rem;
+  border-radius: 0 10px 10px 0;
+  border: none;
+  outline: none;
+  background-color: var(--scroll);
+  color: var(--background);
+  transition: ease-in-out 0.2s;
+  height: 30px;
+  width: 30px;
+}
+
+.save-type:hover {
+  background-color: var(--primary);
+}
+
+.save-file {
+  display: flex;
+  align-items: center;
+}
+
+.save-file:hover {
+  cursor: pointer;
+
+  .save {
+    padding-left: 1.2rem;
+    cursor: pointer;
+  }
+  .save-type {
+    padding-right: 1.2rem;
     cursor: pointer;
   }
 }
-select {
+
+.theme-select {
   color: var(--text) !important;
   border: 3px solid var(--backgroundDark) !important;
   border-radius: 10px !important;
@@ -180,7 +230,8 @@ select {
   font-size: 0.9rem;
   cursor: pointer;
 }
-select:focus, select:active {
+.theme-select:focus,
+.theme-select:active {
   outline: none;
   border: 3px solid var(--backgroundDark) !important;
 }
@@ -205,7 +256,7 @@ select:focus, select:active {
       padding-left: 0;
       margin: auto;
 
-      .icons .discord{
+      .icons .discord {
         width: 40px;
         height: 40px;
       }
@@ -262,10 +313,10 @@ label span {
   border: 1px solid grey;
   display: inline-block;
 }
-[type=checkbox]:checked + span {
+[type="checkbox"]:checked + span {
   background-color: var(--primary);
 }
-[type=checkbox] + span {
+[type="checkbox"] + span {
   transition: ease-in-out 0.4s;
 }
 li[data-checked="true"] div {
@@ -273,12 +324,12 @@ li[data-checked="true"] div {
   opacity: 0.5;
   transition: ease-in-out 0.2s;
 }
-[type=checkbox] + span:hover {
+[type="checkbox"] + span:hover {
   background-color: var(--text);
   opacity: 0.7;
   cursor: pointer;
 }
-[type=checkbox]:checked + span:hover {
+[type="checkbox"]:checked + span:hover {
   background-color: var(--primary);
 }
 

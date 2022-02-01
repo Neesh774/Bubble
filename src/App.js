@@ -63,20 +63,56 @@ export default function App() {
     },
   });
   const [saveDisabled, setSaveDisabled] = useState(
-    editor ? editor.getText().trim().length < 1 : true
+    JSON.parse(localStorage.getItem("text")) ? false : true
   );
   if (!editor) {
     return null;
   }
-  const saveFile = () => {
-    let save = editor.getText();
-    let a = document.createElement("a");
-    a.href = window.URL.createObjectURL(
-      new Blob([save], { type: "text/plain" })
-    );
-    a.download = "bubble.txt";
-    a.click();
+  const saveFile = (type) => {
+    if (!type || type === "txt") {
+      let save = editor.getText();
+      let a = document.createElement("a");
+      a.href = window.URL.createObjectURL(
+        new Blob([save], { type: "text/plain" })
+      );
+      a.download = "bubble.txt";
+      a.click();
+    } else if (type === "json") {
+      let save = editor.getJSON();
+      let a = document.createElement("a");
+      a.href = window.URL.createObjectURL(
+        new Blob([JSON.stringify(save)], { type: "text/plain" })
+      );
+      a.download = "bubble.json";
+      a.click();
+    } else if (type === "html") {
+      let save = editor.getHTML();
+      let a = document.createElement("a");
+      a.href = window.URL.createObjectURL(
+        new Blob([save], { type: "text/plain" })
+      );
+      a.download = "bubble.html";
+      a.click();
+    }
   };
+
+  const importFile = () => {
+    //open filepicker
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", ".json");
+    input.click();
+    input.onchange = () => {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const data = JSON.parse(reader.result);
+        localStorage.setItem("text", JSON.stringify(data));
+        window.location.reload(false);
+      };
+      reader.readAsText(file);
+    }
+  }
 
   document.onkeydown = function (e) {
     if (e.ctrlKey && e.code === "Slash") {
@@ -107,7 +143,6 @@ export default function App() {
     },
   ];
   const themeChange = (value) => {
-    console.log(value);
     localStorage.setItem("theme", value.target.value);
     document.getElementById("root").classList = value.target.value;
     setTheme(value.target.value);
@@ -229,17 +264,42 @@ export default function App() {
                 </defs>
               </svg>
             </a>
+            <button className="import" onClick={importFile}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                />
+              </svg>
+            </button>
           </div>
-          <select value={theme} onChange={themeChange}>
+          <select value={theme} onChange={themeChange} className="theme-select">
             {themeOptions.map((option, i) => (
               <option key={i} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
-          <button onClick={saveFile} className="save" disabled={saveDisabled}>
-            Save As TXT
-          </button>
+          <div className="save-file">
+            <button onClick={saveFile} className="save" disabled={saveDisabled}>
+              Save As TXT
+            </button>
+            <select
+              className="save-type"
+              onChange={(e) => saveFile(e.target.value)}
+            >
+              <option value="txt">TXT</option>
+              <option value="json">JSON(Importable)</option>
+              <option value="html">HTML</option>
+            </select>
+          </div>
         </div>
       </div>
       <Modal
