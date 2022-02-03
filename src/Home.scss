@@ -167,56 +167,26 @@ kbd {
   }
 
   .save {
-    padding: 0.2rem 0.2rem 0.2rem 1rem;
-    border-radius: 10px 0 0 10px;
+    padding: 0.2rem;
+    border-radius: 10px;
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     background-color: var(--scroll);
     color: var(--background);
     margin-left: 1rem;
     transition: ease-in-out 0.2s;
     height: 30px;
+    width: 120px;
+    cursor: pointer;
   }
 
   .save:disabled {
     animation: none;
     cursor: not-allowed;
   }
-}
-
-.save-type {
-  padding: 0.2rem 1rem 0.2rem 0.1rem;
-  margin-right: 0.2rem;
-  border-radius: 0 10px 10px 0;
-  border: none;
-  outline: none;
-  background-color: var(--scroll);
-  color: var(--background);
-  transition: ease-in-out 0.2s;
-  height: 30px;
-  width: 30px;
-}
-
-.save-type:hover {
-  background-color: var(--primary);
-}
-
-.save-file {
-  display: flex;
-  align-items: center;
-}
-
-.save-file:hover {
-  cursor: pointer;
-
-  .save {
-    padding-left: 1.2rem;
-    cursor: pointer;
-  }
-  .save-type {
-    padding-right: 1.2rem;
-    cursor: pointer;
+  .save:hover {
+    width: 125px;
   }
 }
 

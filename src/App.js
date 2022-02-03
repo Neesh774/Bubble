@@ -111,8 +111,8 @@ export default function App() {
         window.location.reload(false);
       };
       reader.readAsText(file);
-    }
-  }
+    };
+  };
 
   document.onkeydown = function (e) {
     if (e.ctrlKey && e.code === "Slash") {
@@ -287,19 +287,14 @@ export default function App() {
               </option>
             ))}
           </select>
-          <div className="save-file">
-            <button onClick={saveFile} className="save" disabled={saveDisabled}>
-              Save As TXT
-            </button>
-            <select
-              className="save-type"
-              onChange={(e) => saveFile(e.target.value)}
-            >
-              <option value="txt">TXT</option>
-              <option value="json">JSON(Importable)</option>
-              <option value="html">HTML</option>
-            </select>
-          </div>
+          <select className="save" onChange={(e) => saveFile(e.target.value)}>
+            <option selected disabled hidden>
+              Save As...
+            </option>
+            <option value="txt">TXT</option>
+            <option value="json">JSON(Importable)</option>
+            <option value="html">HTML</option>
+          </select>
         </div>
       </div>
       <Modal
