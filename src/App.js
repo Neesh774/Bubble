@@ -19,6 +19,7 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./modal.scss";
 import "./menus.scss";
+import CharacterCount from "@tiptap/extension-character-count";
 const CustomDocument = Document.extend({
   addKeyboardShortcuts() {
     return {
@@ -47,6 +48,7 @@ export default function App() {
         nested: true,
       }),
       TaskList,
+      CharacterCount,
     ],
     content: JSON.parse(localStorage.getItem("text")) ?? "",
     onUpdate({ editor }) {
@@ -68,32 +70,14 @@ export default function App() {
   if (!editor) {
     return null;
   }
-  const saveFile = (type) => {
-    if (!type || type === "txt") {
-      let save = editor.getText();
-      let a = document.createElement("a");
-      a.href = window.URL.createObjectURL(
-        new Blob([save], { type: "text/plain" })
-      );
-      a.download = "bubble.txt";
-      a.click();
-    } else if (type === "json") {
-      let save = editor.getJSON();
-      let a = document.createElement("a");
-      a.href = window.URL.createObjectURL(
-        new Blob([JSON.stringify(save)], { type: "text/plain" })
-      );
-      a.download = "bubble.json";
-      a.click();
-    } else if (type === "html") {
-      let save = editor.getHTML();
-      let a = document.createElement("a");
-      a.href = window.URL.createObjectURL(
-        new Blob([save], { type: "text/plain" })
-      );
-      a.download = "bubble.html";
-      a.click();
-    }
+  const saveFile = () => {
+    let save = editor.getText();
+    let a = document.createElement("a");
+    a.href = window.URL.createObjectURL(
+      new Blob([save], { type: "text/plain" })
+    );
+    a.download = "bubble-" + new Date().toLocaleTimeString() + ".txt";
+    a.click();
   };
 
   const importFile = () => {
@@ -181,7 +165,6 @@ export default function App() {
           </button>
         </BubbleMenu>
       )}
-
       {editor && (
         <FloatingMenu
           className="floating-menu"
@@ -236,6 +219,9 @@ export default function App() {
       </div>
       <div className="actions">
         <div className="actionsChild">
+          <span className="count">{`${editor.storage.characterCount.words()} words • ${editor.storage.characterCount.characters()} characters`}</span>
+        </div>
+        <div className="actionsChild">
           <div className="icons">
             <a
               href="https://discord.gg/b8ugMm7nvc"
@@ -287,14 +273,13 @@ export default function App() {
               </option>
             ))}
           </select>
-          <select className="save" onChange={(e) => saveFile(e.target.value)}>
-            <option selected disabled hidden>
-              Save As...
-            </option>
-            <option value="txt">TXT</option>
-            <option value="json">JSON(Importable)</option>
-            <option value="html">HTML</option>
-          </select>
+          <button
+            disabled={saveDisabled}
+            className="save"
+            onClick={() => saveFile()}
+          >
+            Save
+          </button>
         </div>
       </div>
       <Modal

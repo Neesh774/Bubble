@@ -34,6 +34,12 @@
   outline: none;
 }
 
+.count {
+  color: #ffffffc0;
+  font-size: 0.9rem;
+  padding: 0 0.3rem;
+}
+
 .tips {
   position: fixed;
   transform: translate(0%, -50%);
@@ -96,21 +102,31 @@ kbd {
 
 .actions {
   position: fixed;
-  bottom: 5%;
+  transform: translate(0%, -50%);
+  bottom: 1rem;
   right: 0;
-  align-items: center;
+  margin-right: 2rem;
   animation: actions-pop-in 0.5s ease-in;
   -webkit-animation: actions-pop-in 0.5s ease-in;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-end;
 
   .actionsChild {
     width: fit-content;
     align-items: center;
     display: flex;
-    padding-right: 5rem;
-    padding-left: 1rem;
     backdrop-filter: blur(1px);
     border-radius: 20px;
+    flex-direction: row;
+
+    .count {
+      color: #ffffff70;
+      font-size: 0.9rem;
+      padding: 0 0;
+    }
 
     .icons {
       display: flex;
@@ -167,7 +183,7 @@ kbd {
   }
 
   .save {
-    padding: 0.2rem;
+    padding: 0.5rem;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -176,17 +192,8 @@ kbd {
     color: var(--background);
     margin-left: 1rem;
     transition: ease-in-out 0.2s;
-    height: 30px;
-    width: 120px;
+    width: 5rem;
     cursor: pointer;
-  }
-
-  .save:disabled {
-    animation: none;
-    cursor: not-allowed;
-  }
-  .save:hover {
-    width: 125px;
   }
 }
 
