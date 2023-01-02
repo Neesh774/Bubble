@@ -35,7 +35,7 @@
 }
 
 .count {
-  color: #ffffffc0;
+  color: var(--count);
   font-size: 0.9rem;
   padding: 0 0.3rem;
 }
@@ -123,7 +123,7 @@ kbd {
     flex-direction: row;
 
     .count {
-      color: #ffffff70;
+      color: var(--text);
       font-size: 0.9rem;
       padding: 0 0;
     }
