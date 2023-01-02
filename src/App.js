@@ -219,9 +219,6 @@ export default function App() {
       </div>
       <div className="actions">
         <div className="actionsChild">
-          <span className="count">{`${editor.storage.characterCount.words()} words • ${editor.storage.characterCount.characters()} characters`}</span>
-        </div>
-        <div className="actionsChild">
           <div className="icons">
             <a
               href="https://discord.gg/b8ugMm7nvc"
@@ -266,6 +263,11 @@ export default function App() {
               </svg>
             </button>
           </div>
+        </div>
+        <div className="actionsChild">
+          <span className="count">{`${editor.storage.characterCount.words()} words • ${editor.storage.characterCount.characters()} characters`}</span>
+        </div>
+        <div className="actionsChild">
           <select value={theme} onChange={themeChange} className="theme-select">
             {themeOptions.map((option, i) => (
               <option key={i} value={option.value}>
