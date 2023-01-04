@@ -76,14 +76,14 @@ html {
   z-index: 1;
 
   .tips-content-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.3rem;
+    font-weight: 700;
     margin-bottom: 1rem;
     color: var(--text);
   }
 
   .tips-content-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
     color: var(--text);
   }
@@ -94,6 +94,7 @@ html {
   -webkit-animation: tips-pop-in 0.3s ease-in;
   opacity: 1;
   z-index: 3;
+  box-shadow: -4px -2px 35px -6px rgba(0,0,0,0.3);
 }
 
 br {
@@ -103,6 +104,7 @@ br {
 
 hr {
   color: var(--primary);
+  margin: 1.4rem 0;
 }
 
 kbd {
@@ -122,7 +124,7 @@ kbd {
 .actions {
   position: fixed;
   transform: translate(0%, -50%);
-  bottom: 1rem;
+  bottom: 0rem;
   right: 0;
   margin-right: 2rem;
   animation: actions-pop-in 0.5s ease-in;
