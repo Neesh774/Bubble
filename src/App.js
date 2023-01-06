@@ -141,15 +141,24 @@ export default function App() {
       );
       localStorage.removeItem(bubble);
       localStorage.setItem(e.target.value, JSON.stringify(editor.getJSON()));
+      document.removeEventListener("keydown", (e) => {
+        if (e.code === "Enter") {
+          e.target.blur();
+        }
+      });
     }
   };
 
-  const createTabRenameListener = (bubble) => {
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Enter") {
-        e.target.blur();
-      }
-    });
+  const createTabRenameListener = () => {
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.code === "Enter") {
+          e.target.blur();
+        }
+      },
+      { once: true }
+    );
   };
 
   return (
@@ -248,9 +257,7 @@ export default function App() {
                 onDoubleClick={() => {
                   if (tab === bubble) {
                     setRenamingTab(bubble);
-                    document.addEventListener("keydown", (e) =>
-                      createTabRenameListener(bubble, e)
-                    );
+                    createTabRenameListener();
                   }
                 }}
               >
@@ -262,9 +269,6 @@ export default function App() {
                     autoFocus
                     onBlur={(e) => {
                       renameTab(bubble, e);
-                      document.removeEventListener("keydown", (e) =>
-                        createTabRenameListener(bubble, e)
-                      );
                     }}
                   />
                 ) : (
