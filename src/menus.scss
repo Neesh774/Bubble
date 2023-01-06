@@ -13,6 +13,7 @@
     display: flex;
     background-color: var(--backgroundDark);
     padding: 0.2rem;
+    width: fit-content;
     border-radius: 0.5rem;
   
     button {
@@ -28,6 +29,10 @@
         opacity: 1;
         color: var(--text);
       }
+
+      .cafe &, .light & {
+        color: white;
+      }
     }
   }
   
@@ -36,6 +41,7 @@
     background-color: var(--backgroundDark);
     padding: 0.2rem;
     border-radius: 0.5rem;
+    width: fit-content;
   
     button {
       border: none;
@@ -49,6 +55,10 @@
       &.is-active {
         opacity: 1;
         color: var(--text);
+      }
+    
+      .cafe &, .light & {
+        color: white;
       }
     }
   }

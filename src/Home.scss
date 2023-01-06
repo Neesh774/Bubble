@@ -23,7 +23,6 @@ html {
 
 .ProseMirror {
   background: var(--background);
-  border: none;
   resize: none;
   font-size: 1.1em;
   padding: 25px 25%;
@@ -32,7 +31,6 @@ html {
   font-family: 'Source Sans Pro', sans-serif;
   color: var(--text);
   overflow: auto;
-  width: 100%;
   height: 100vh;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
@@ -69,7 +67,7 @@ html {
   padding: 1rem;
   background-color: var(--background);
   border: 3px solid var(--primary);
-  border-radius: 10px;
+  border-radius: 4px;
   animation: tips-pop-out 0.3s ease-out;
   -webkit-animation: tips-pop-out 0.3s ease-out;
   opacity: 0;
@@ -142,6 +140,7 @@ kbd {
     backdrop-filter: blur(1px);
     border-radius: 20px;
     flex-direction: row;
+    height: 30px;
 
     .count {
       color: var(--text);
@@ -205,7 +204,7 @@ kbd {
 
   .save {
     padding: 0.5rem;
-    border-radius: 10px;
+    border-radius: 4px;
     border: none;
     outline: none;
     font-size: 0.9rem;
@@ -220,12 +219,12 @@ kbd {
 
 .theme-select {
   color: var(--text) !important;
-  border: 3px solid var(--backgroundDark) !important;
-  border-radius: 10px !important;
+  border: 3px solid var(--primary) !important;
+  border-radius: 4px !important;
   background-color: var(--background);
-  height: 30px;
-  padding: 0 0.4rem;
+  height: 100%;
   font-size: 0.9rem;
+  padding: 0 0.5rem;
   cursor: pointer;
 }
 .theme-select:focus,
@@ -398,5 +397,190 @@ li[data-checked="true"] div {
   to {
     opacity: 1;
     bottom: 0px;
+  }
+}
+
+.tab-bar {
+  position: absolute;
+  left: 1rem;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 20%;
+  height: fit-content;
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: 20;
+
+  .tab-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.03);
+
+    .cafe, .light {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .terminal {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .tabs {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--backgroundDark);
+    gap: 0.3rem;
+    padding: 0.5rem;
+  }
+  .tab {
+    width: 100%;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: "Source Sans Pro", sans-serif;
+    display: flex;
+    height: fit-content;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 100%;
+    animation: new-tab 0.1s ease-in-out;
+
+    .tab-name {
+      transition: ease-in-out 0.1s;
+      padding: 0.3rem 0.6rem;
+      padding-left: 0.5rem;
+      border-radius: 4px;
+      width: 80%;
+      cursor: pointer;
+
+      &[data-isonly="true"] {
+        width: 100%;
+      }
+
+      div {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .cafe &:hover, .light &:hover {
+        color: var(--text);
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .terminal & {
+        color: var(--backgroundDark);
+      }
+
+      .terminal &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .tab-close {
+      cursor: pointer;
+      transition: ease-in-out 0.1s;
+      padding: 0.2rem;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .cafe &:hover, .light &:hover {
+        color: var(--text);
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .terminal &, .dark &, .blueberry & {
+        color: white;
+      }
+    }
+
+    &.active .tab-name {
+      color: var(--backgroundDark);
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .cafe &.active .tab-name, .light &.active .tab-name {
+      color: var(--text);
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .terminal &.active .tab-name {
+      color: var(--text);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .new-tab {
+    margin-top: 0.5rem;
+    transition: ease-in-out 0.1s;
+    padding: 0.2rem 0.6rem;
+    padding-left: 0.8rem;
+    border-radius: 4px;
+    font-size: 1.6rem;
+  
+    div {
+      width: 100%;
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .cafe &:hover, .light &:hover {
+      color: var(--text);
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .tab-rename {
+    transition: ease-in-out 0.1s;
+    border-radius: 4px;
+    font-size: 1rem;
+    max-width: 100%;
+    border: none;
+    color: var(--text);
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@keyframes new-tab {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

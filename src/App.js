@@ -1,5 +1,5 @@
 import "./Home.scss";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   EditorContent,
   useEditor,
@@ -15,11 +15,13 @@ import Text from "@tiptap/extension-text";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import { Modal } from "react-responsive-modal";
+import { BsPlus, BsX } from "react-icons/bs";
 
 import "react-responsive-modal/styles.css";
 import "./modal.scss";
 import "./menus.scss";
 import CharacterCount from "@tiptap/extension-character-count";
+import { useLocalStorage } from "./utils/useLocalStorage";
 const CustomDocument = Document.extend({
   addKeyboardShortcuts() {
     return {
@@ -33,39 +35,48 @@ export default function App() {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") ?? "light"
   );
+  const [bubbles, setBubbles] = useLocalStorage("bubbles", ["New Bubble"]);
   const closeModal = () => {
     setModal(false);
   };
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Underline,
-      Typography,
-      CustomDocument,
-      Paragraph,
-      Text,
-      TaskItem.configure({
-        nested: true,
-      }),
-      TaskList,
-      CharacterCount,
-    ],
-    content: JSON.parse(localStorage.getItem("text")) ?? "",
-    onUpdate({ editor }) {
-      const json = JSON.stringify(editor.getJSON());
-      const text = editor.getText();
-      localStorage.setItem("text", json);
-      const tips = document.getElementsByClassName("tips")[0];
-      if (tips.classList.contains("show") && text.trim().length > 0) {
-        tips.classList.remove("show");
-      } else if (!tips.classList.contains("show") && text.trim().length < 1) {
-        tips.classList.add("show");
-      }
-      text.trim().length > 0 ? setSaveDisabled(false) : setSaveDisabled(true);
+  const [tab, setTab] = useState(
+    bubbles.length > 0 ? bubbles[0] : "New Bubble"
+  );
+  const [renamingTab, setRenamingTab] = useState(null);
+  const currentTabRef = useRef(null);
+
+  const onUpdate = ({ editor }) => {
+    const json = JSON.stringify(editor.getJSON());
+    const text = editor.getText();
+    localStorage.setItem(tab, json);
+    if (!bubbles.includes(tab)) {
+      setBubbles([...bubbles, tab]);
+    }
+    const tips = document.getElementsByClassName("tips")[0];
+    if (tips.classList.contains("show") && text.trim().length > 0) {
+      tips.classList.remove("show");
+    } else if (!tips.classList.contains("show") && text.trim().length < 1) {
+      tips.classList.add("show");
+    }
+  };
+
+  const editor = useEditor(
+    {
+      extensions: [
+        StarterKit,
+        Underline,
+        Typography,
+        CustomDocument,
+        TaskItem.configure({
+          nested: true,
+        }),
+        TaskList,
+        CharacterCount,
+      ],
+      content: JSON.parse(localStorage.getItem(tab)) ?? "",
+      onUpdate,
     },
-  });
-  const [saveDisabled, setSaveDisabled] = useState(
-    JSON.parse(localStorage.getItem("text")) ? false : true
+    [tab]
   );
   if (!editor) {
     return null;
@@ -78,24 +89,6 @@ export default function App() {
     );
     a.download = "bubble-" + new Date().toLocaleTimeString() + ".txt";
     a.click();
-  };
-
-  const importFile = () => {
-    //open filepicker
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", ".json");
-    input.click();
-    input.onchange = () => {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const data = JSON.parse(reader.result);
-        localStorage.setItem("text", JSON.stringify(data));
-        window.location.reload(false);
-      };
-      reader.readAsText(file);
-    };
   };
 
   document.onkeydown = function (e) {
@@ -131,6 +124,34 @@ export default function App() {
     document.getElementById("root").classList = value.target.value;
     setTheme(value.target.value);
   };
+
+  const renameTab = (bubble, e) => {
+    if (renamingTab === bubble && e.target.value.trim().length > 0) {
+      setRenamingTab(null);
+      if (tab === bubble) {
+        setTab(e.target.value);
+      }
+      setBubbles(
+        bubbles.map((b) => {
+          if (b === bubble) {
+            return e.target.value;
+          }
+          return b;
+        })
+      );
+      localStorage.removeItem(bubble);
+      localStorage.setItem(e.target.value, JSON.stringify(editor.getJSON()));
+    }
+  };
+
+  const createTabRenameListener = (bubble) => {
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Enter") {
+        e.target.blur();
+      }
+    });
+  };
+
   return (
     <>
       {editor && (
@@ -206,6 +227,98 @@ export default function App() {
         </FloatingMenu>
       )}
       <EditorContent editor={editor} />
+      <div className="tab-bar">
+        <div className="tab-background" />
+        <div className="tabs">
+          {bubbles?.map((bubble, i) => (
+            <div key={i} className={`tab ${tab === bubble ? "active" : ""}`}>
+              <div
+                className="tab-name"
+                data-isonly={bubbles.length === 1}
+                ref={tab === bubble ? currentTabRef : null}
+                onClick={() => {
+                  setTab(bubble);
+                  editor.commands.setContent(
+                    JSON.parse(localStorage.getItem(bubble))
+                  );
+                  document.getElementsByClassName(
+                    "tab-background"
+                  )[0].style.top = currentTabRef.current.offsetTop + "px";
+                }}
+                onDoubleClick={() => {
+                  if (tab === bubble) {
+                    setRenamingTab(bubble);
+                    document.addEventListener("keydown", (e) =>
+                      createTabRenameListener(bubble, e)
+                    );
+                  }
+                }}
+              >
+                {renamingTab === bubble ? (
+                  <input
+                    type="text"
+                    className="tab-rename"
+                    defaultValue={bubble}
+                    autoFocus
+                    onBlur={(e) => {
+                      renameTab(bubble, e);
+                      document.removeEventListener("keydown", (e) =>
+                        createTabRenameListener(bubble, e)
+                      );
+                    }}
+                  />
+                ) : (
+                  <div>{bubble}</div>
+                )}
+              </div>
+              {bubbles.length > 1 && (
+                <button
+                  className="tab-close"
+                  onClick={() => {
+                    const newBubbles = bubbles ?? [];
+                    newBubbles.splice(i, 1);
+                    setBubbles(newBubbles);
+                    localStorage.removeItem(bubble);
+                    if (tab === bubble) {
+                      setTab(newBubbles[0]);
+                      editor.commands.setContent(
+                        JSON.parse(localStorage.getItem(newBubbles[0]))
+                      );
+                    } else {
+                      setTab(tab);
+                      editor.commands.setContent(
+                        JSON.parse(localStorage.getItem(tab))
+                      );
+                    }
+                  }}
+                >
+                  <BsX />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+        <div
+          className="tab new-tab"
+          onClick={() => {
+            const newBubbles = bubbles ?? [];
+            let newBubbleName = "New Bubble";
+            let i = 0;
+            while (newBubbles.includes(newBubbleName)) {
+              // New Bubble (1) New Bubble (2) etc
+              newBubbleName = "New Bubble (" + ++i + ")";
+            }
+            newBubbles.push(newBubbleName);
+            localStorage.setItem("bubbles", JSON.stringify(newBubbles));
+            setTab(newBubbleName);
+            editor.commands.setContent("", true);
+          }}
+        >
+          <div>
+            <BsPlus />
+          </div>
+        </div>
+      </div>
       <div className="tips show">
         <div className="tips-content-title">Welcome to Bubble!</div>
         <div className="tips-content-text">
@@ -260,11 +373,7 @@ export default function App() {
               </option>
             ))}
           </select>
-          <button
-            disabled={saveDisabled}
-            className="save"
-            onClick={() => saveFile()}
-          >
+          <button className="save" onClick={() => saveFile()}>
             Save
           </button>
         </div>
