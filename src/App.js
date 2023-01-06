@@ -309,9 +309,8 @@ export default function App() {
               newBubbleName = "New Bubble (" + ++i + ")";
             }
             newBubbles.push(newBubbleName);
-            localStorage.setItem("bubbles", JSON.stringify(newBubbles));
+            setBubbles(newBubbles);
             setTab(newBubbleName);
-            editor.commands.setContent("", true);
           }}
         >
           <div>
