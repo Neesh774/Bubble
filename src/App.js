@@ -240,7 +240,10 @@ export default function App() {
         <div className="tab-background" />
         <div className="tabs">
           {bubbles?.map((bubble, i) => (
-            <div key={i} className={`tab ${tab === bubble ? "active" : ""}`}>
+            <div
+              key={i}
+              className={`tab close-${i} ${tab === bubble ? "active" : ""}`}
+            >
               <div
                 className="tab-name"
                 data-isonly={bubbles.length === 1}
@@ -279,21 +282,34 @@ export default function App() {
                 <button
                   className="tab-close"
                   onClick={() => {
-                    const newBubbles = bubbles ?? [];
-                    newBubbles.splice(i, 1);
-                    setBubbles(newBubbles);
-                    localStorage.removeItem(bubble);
-                    if (tab === bubble) {
-                      setTab(newBubbles[0]);
-                      editor.commands.setContent(
-                        JSON.parse(localStorage.getItem(newBubbles[0]))
-                      );
-                    } else {
-                      setTab(tab);
-                      editor.commands.setContent(
-                        JSON.parse(localStorage.getItem(tab))
-                      );
-                    }
+                    const closeTab = document.getElementsByClassName(
+                      `close-${i}`
+                    )[0];
+                    closeTab.style.animation = "close-tab 0.1s ease-in-out";
+                    setTimeout(() => {
+                      const newBubbles = bubbles ?? [];
+                      newBubbles.splice(i, 1);
+                      setBubbles(newBubbles);
+                      localStorage.removeItem(bubble);
+                      if (tab === bubble) {
+                        setTab(newBubbles[0]);
+                        editor.commands.setContent(
+                          JSON.parse(localStorage.getItem(newBubbles[0]))
+                        );
+                      } else {
+                        setTab(tab);
+                        editor.commands.setContent(
+                          JSON.parse(localStorage.getItem(tab))
+                        );
+                      }
+
+                      // remove close-tab animation from all tabs
+                      for (let i = 0; i < newBubbles.length; i++) {
+                        document.getElementsByClassName(
+                          `close-${i}`
+                        )[0].style.animation = "";
+                      }
+                    }, 90);
                   }}
                 >
                   <BsX />

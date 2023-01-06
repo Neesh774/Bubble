@@ -584,3 +584,14 @@ li[data-checked="true"] div {
     transform: translateY(0px);
   }
 }
+
+@keyframes close-tab {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
