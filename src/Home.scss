@@ -595,3 +595,12 @@ li[data-checked="true"] div {
     transform: translateY(-10px);
   }
 }
+
+.actionsChild.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  height: 60px;
+}
